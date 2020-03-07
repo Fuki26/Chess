@@ -1,0 +1,117 @@
+﻿@model Chess.Models.Board
+
+<link href="~/Content/chess.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.2.min.js"></script>
+<script src="~/Scripts/ChessFunctionality.js"></script>
+
+
+<table id="chessBoard">
+    @{
+        for (int i = 1; i <= 8; i++)
+        {
+            <tr>
+                @for (int j = 1; j <= 8; j++)
+                {
+                    <td id='@i@j' class='@(((i + j) % 2 == 0) ? "white" : "black")'>
+                        <span></span>
+                        <p></p>
+                        @foreach (var pieces in Model.figures)
+                        {
+                            if (pieces.Coordinates.Col == j && pieces.Coordinates.Row == i)
+                            {
+                                <div id='@pieces.Id' class='@pieces.Color@pieces.Type' data-color='@pieces.Color'></div>
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    }
+</table>
+
+<script type="text/javascript">
+    var x, y;
+    var counter = 0;
+    var pieces;
+    var color = "";
+
+    $("div").draggable({
+        containment: "#chessBoard",
+        revert: "invalid",
+        scroll: false,
+        cursor: "move",
+        start: function (event, ui) {
+            x = ui.offset.top;
+            y = ui.offset.left;
+        },
+        drag: function () {
+        },
+        stop: function (event, ui) { }
+    });
+
+    $("div").click(function (event) {
+        var elementId = event.target.id;
+
+        var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model) as String);
+        var currentFigurePossibleMoves = model.figures.find((figure) => figure.Id === elementId).PossibleMoves;
+        for (var i = 0; i < currentFigurePossibleMoves.length; i++) {
+            $("#" + currentFigurePossibleMoves[i].Row + "" + currentFigurePossibleMoves[i].Col).addClass("pink");
+        }
+    });
+
+    $("td").droppable({
+        hoverClass: "ui-state-active",
+        drop: function (event, ui) {
+
+            var value = {
+                id: ui.draggable[0].id,
+                target: event.target.id,
+                col: event.target.id.substr(1, 1),
+                row: event.target.id.substr(0, 1)
+            }
+
+            $.ajax({
+                url: '@Url.Action("MoveFigure", "Home")',
+                type: "POST",
+                data: value,
+                success: function (str) {
+                    var result = str.split(';');
+                    if (result[0] == "True") {
+                        counter++;
+                        if (counter % 2 == 0) {
+                            EnableWhiteFigures();
+                        } else {
+                            EnableBlackFigures();
+                        }
+                        if (result[1]) {
+                            $("#" + result[1]).hide("explode", 1000);
+                            $("#" + result[1]).remove();
+                        }
+                    } else {
+                        $("#" + ui.draggable[0].id).offset({ top: x, left: y })
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // TODO: Here is the place the errors should be handled properly
+                }
+            });
+        }
+    })
+
+    function EnableBlackFigures() {
+        $("div[data-color=Black]").draggable('enable');
+        $("div[data-color=White]").draggable('disable');
+    }
+
+    function EnableWhiteFigures() {
+        $("div[data-color=Black]").draggable('disable');
+        $("div[data-color=White]").draggable('enable');
+    }
+
+    EnableWhiteFigures();
+
+</script>
+
