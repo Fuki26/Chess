@@ -9,73 +9,22 @@ namespace Chess.Controllers
 {
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
-        private static List<Coordinates> AllChessCoordinates = new List<Coordinates>()
+        private static List<Coordinates> AllChessCoordinates
         {
-            new Coordinates(){ Row = 1, Col = 1 },
-            new Coordinates(){ Row = 1, Col = 2 },
-            new Coordinates(){ Row = 1, Col = 3 },
-            new Coordinates(){ Row = 1, Col = 4 },
-            new Coordinates(){ Row = 1, Col = 5 },
-            new Coordinates(){ Row = 1, Col = 6 },
-            new Coordinates(){ Row = 1, Col = 7 },
-            new Coordinates(){ Row = 1, Col = 8 },
-            new Coordinates(){ Row = 2, Col = 1 },
-            new Coordinates(){ Row = 2, Col = 2 },
-            new Coordinates(){ Row = 2, Col = 3 },
-            new Coordinates(){ Row = 2, Col = 4 },
-            new Coordinates(){ Row = 2, Col = 5 },
-            new Coordinates(){ Row = 2, Col = 6 },
-            new Coordinates(){ Row = 2, Col = 7 },
-            new Coordinates(){ Row = 2, Col = 8 },
-            new Coordinates(){ Row = 3, Col = 1 },
-            new Coordinates(){ Row = 3, Col = 2 },
-            new Coordinates(){ Row = 3, Col = 3 },
-            new Coordinates(){ Row = 3, Col = 4 },
-            new Coordinates(){ Row = 3, Col = 5 },
-            new Coordinates(){ Row = 3, Col = 6 },
-            new Coordinates(){ Row = 3, Col = 7 },
-            new Coordinates(){ Row = 3, Col = 8 },
-            new Coordinates(){ Row = 4, Col = 1 },
-            new Coordinates(){ Row = 4, Col = 2 },
-            new Coordinates(){ Row = 4, Col = 3 },
-            new Coordinates(){ Row = 4, Col = 4 },
-            new Coordinates(){ Row = 4, Col = 5 },
-            new Coordinates(){ Row = 4, Col = 6 },
-            new Coordinates(){ Row = 4, Col = 7 },
-            new Coordinates(){ Row = 4, Col = 8 },
-            new Coordinates(){ Row = 5, Col = 1 },
-            new Coordinates(){ Row = 5, Col = 2 },
-            new Coordinates(){ Row = 5, Col = 3 },
-            new Coordinates(){ Row = 5, Col = 4 },
-            new Coordinates(){ Row = 5, Col = 5 },
-            new Coordinates(){ Row = 5, Col = 6 },
-            new Coordinates(){ Row = 5, Col = 7 },
-            new Coordinates(){ Row = 5, Col = 8 },
-            new Coordinates(){ Row = 6, Col = 1 },
-            new Coordinates(){ Row = 6, Col = 2 },
-            new Coordinates(){ Row = 6, Col = 3 },
-            new Coordinates(){ Row = 6, Col = 4 },
-            new Coordinates(){ Row = 6, Col = 5 },
-            new Coordinates(){ Row = 6, Col = 6 },
-            new Coordinates(){ Row = 6, Col = 7 },
-            new Coordinates(){ Row = 6, Col = 8 },
-            new Coordinates(){ Row = 7, Col = 1 },
-            new Coordinates(){ Row = 7, Col = 2 },
-            new Coordinates(){ Row = 7, Col = 3 },
-            new Coordinates(){ Row = 7, Col = 4 },
-            new Coordinates(){ Row = 7, Col = 5 },
-            new Coordinates(){ Row = 7, Col = 6 },
-            new Coordinates(){ Row = 7, Col = 7 },
-            new Coordinates(){ Row = 7, Col = 8 },
-            new Coordinates(){ Row = 8, Col = 1 },
-            new Coordinates(){ Row = 8, Col = 2 },
-            new Coordinates(){ Row = 8, Col = 3 },
-            new Coordinates(){ Row = 8, Col = 4 },
-            new Coordinates(){ Row = 8, Col = 5 },
-            new Coordinates(){ Row = 8, Col = 6 },
-            new Coordinates(){ Row = 8, Col = 7 },
-            new Coordinates(){ Row = 8, Col = 8 }
-        };
+            get
+            {
+                List<Coordinates> coordinates = new List<Coordinates>();
+                for (int i = 1; i <= 8; i++)
+                {
+                    for (int j = 1; j <= 8; j++)
+                    {
+                        coordinates.Add(new Coordinates() { Row = i, Col = j });
+                    }
+                }
+
+                return coordinates;
+            }
+        }
 
         public static Board boardModel = new Board();
 
@@ -100,7 +49,7 @@ namespace Chess.Controllers
 
         public Microsoft.AspNetCore.Mvc.ActionResult Index()
         {
-            boardModel.figures.Clear();
+            boardModel.Figures.Clear();
             int otherFiguresRowNumber = 1;
             int pawnsRowNumber = 2;
             Color color = Color.Black;
@@ -121,7 +70,7 @@ namespace Chess.Controllers
                     FiguresFactory figuresFactory = new FiguresFactory();
                     var pawn = figuresFactory.getPawn();
                     var adjustedFigure = this.SetFigureInitialValues(pawn, i.ToString() + color + pawn.Type, i, pawnsRowNumber, color);
-                    boardModel.figures.Add(adjustedFigure);
+                    boardModel.Figures.Add(adjustedFigure);
 
                     switch (i)
                     {
@@ -175,11 +124,11 @@ namespace Chess.Controllers
                             }
                     }
 
-                    boardModel.figures.Add(adjustedFigure);
+                    boardModel.Figures.Add(adjustedFigure);
                 }
             }
 
-            boardModel.figures = this.CalculatePossibleMoves(boardModel.figures, Color.White);
+            boardModel.Figures = this.CalculatePossibleMoves(boardModel.Figures, Color.White);
             return View(boardModel);
         }
 
@@ -361,7 +310,7 @@ namespace Chess.Controllers
             List<Figure> droppedFigures = new List<Figure>();
             foreach (var direct in coordinates)
             {
-                foreach (var pc in boardModel.figures)
+                foreach (var pc in boardModel.Figures)
                 {
                     if (direct.Row == pc.Coordinates.Row && direct.Col == pc.Coordinates.Col)
                     {
@@ -378,7 +327,7 @@ namespace Chess.Controllers
                     { }
                     else
                     {
-                        boardModel.figures.RemoveAll(a => a.Id == droppedFigures[0].Id);
+                        boardModel.Figures.RemoveAll(a => a.Id == droppedFigures[0].Id);
                         removeID = droppedFigures[0].Id;
                     }
                 }
@@ -400,9 +349,9 @@ namespace Chess.Controllers
         public Microsoft.AspNetCore.Mvc.JsonResult MoveFigure(Move move)
         {
             var currentFigure = (
-                            from _piece in boardModel.figures
-                            where _piece.Id == move.Id
-                            select _piece
+                            from figure in boardModel.Figures
+                            where figure.Id == move.Id
+                            select figure
                          )
                          .FirstOrDefault();
 
@@ -459,7 +408,7 @@ namespace Chess.Controllers
                     }
             }
 
-            boardModel.figures = this.CalculatePossibleMoves(boardModel.figures, Color.White);
+            boardModel.Figures = this.CalculatePossibleMoves(boardModel.Figures, Color.White);
             return Json(result);
         }
 
