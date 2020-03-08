@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Chess.Models
+﻿namespace Chess.Models
 {
     public class Move
     {
-        public string Id { get; set; }
-        public string Target { get; set; }
-        public int Row { get; set; }
-        public int Col { get; set; }
+        public string FigureId { get; set; }
+        public string TargetId { get; set; }
+        public int TargetRow { get; set; }
+        public int TargetCol { get; set; }
     }
 }

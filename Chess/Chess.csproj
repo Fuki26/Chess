@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Scripts\ChatFunctionality.js" />
     <Content Remove="wwwroot\Scripts\jquery-1.9.1.intellisense.js" />
     <Content Remove="wwwroot\Scripts\jquery-1.9.1.js" />
     <Content Remove="wwwroot\Scripts\jquery-1.9.1.min.js" />
@@ -17,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Scripts\ChatFunctionality.js" />
     <None Include="wwwroot\Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="wwwroot\Scripts\jquery-1.9.1.js" />
     <None Include="wwwroot\Scripts\jquery-1.9.1.min.js" />

@@ -54,6 +54,7 @@ namespace Chess
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<ChessHub>("/chessHub");
             });
         }
     }

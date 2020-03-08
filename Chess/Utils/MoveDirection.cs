@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Chess.Utils
 {
-    public static class Direction
+    public static class MoveDirection
     {
         public const string Cross = "cross";
         public const string Direct = "direct";
