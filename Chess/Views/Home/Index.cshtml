@@ -81,12 +81,19 @@
             var data = {
                 FigureId: ui.draggable[0].id,
                 TargetId: event.target.id,
-                TargetCol: event.target.id.substr(1, 1),
-                TargetRow: event.target.id.substr(0, 1)
+                TargetCol: parseInt(event.target.id.substr(1, 1)),
+                TargetRow: parseInt(event.target.id.substr(0, 1))
             }
 
-            connection.invoke('SendMessage', data).catch(error => {
-                var debug = -1;
+            connection.start().then(() => {
+                console.log("Connection is established");
+                connection.invoke('SecondCommand', data).then(() => {
+                    connection.stop().then(() => {
+                        console.log("Connection is closed 1");
+                    });
+                }).catch(error => {
+                    var debug = -1;
+                });
             });
         }
     })
@@ -103,8 +110,12 @@
 
     connection.start().then(() => {
         console.log("Connection is established");
-        connection.invoke('SendMessage', null).catch(error => {
-            // Handle the error
+        connection.invoke('SendMessage', null).then(() => {
+            connection.stop().then(() => {
+                console.log("Connection is closed 1");
+            });
+        }).catch(error => {
+            var debug = -1;
         });
     });
 
@@ -117,10 +128,5 @@
             $("#" + currentFigurePossibleMoves[i].Row + "" + currentFigurePossibleMoves[i].Col).addClass("pink");
         }
     });*@
-
-    
-
-    
-
 </script>
 

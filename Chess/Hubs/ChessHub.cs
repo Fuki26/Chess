@@ -19,6 +19,11 @@ namespace Chess.Hubs
         }
 
         public static Board boardModel = new Board();
+
+        public async Task SecondCommand(Move move)
+        {
+            var debug = -1;
+        }
         public async Task SendMessage(Move? move)
         {
             if (move == null)
