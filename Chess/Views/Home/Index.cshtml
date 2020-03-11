@@ -39,6 +39,8 @@
 
     connection.on("ReceiveMessage", function (board) {
         $("div").remove();
+        $("td").removeClass("pink");
+
         for (i = 0; i < board.figures.length; i++) {
             var currentFigure = board.figures[i];
 
@@ -48,11 +50,18 @@
 
             var cellId = currentFigure.coordinates.row + "" + currentFigure.coordinates.col;
 
-            $("td#" + cellId).append($('<div id=' + figureId + ' class=' + figureColor + figureType + ' data-color=' + figureColor + '></div>'));
+            var newFigure = $('<div id=' + figureId + ' class=' + figureColor + figureType + ' data-color=' + figureColor + '></div>');
 
-            //Consider whether the element is removed and make the efect of explode
-            //$("#" + result[1]).hide("explode", 1000);
-            //$("#" + result[1]).remove();
+            newFigure.click(attachClickForPossibleMovesShowing.bind(currentFigure));
+
+            function attachClickForPossibleMovesShowing() {
+                $("td").removeClass("pink");
+                for (var i = 0; i < this.possibleMoves.length; i++) {
+                    $("#" + this.possibleMoves[i].row + "" + this.possibleMoves[i].col).addClass("pink");
+                }
+            }
+
+            $("td#" + cellId).append(newFigure);
         }
 
         $("div").draggable({
@@ -121,19 +130,5 @@
             });
         }
     })
-
-    
-
-    
-
-    @*$("div").click(function (event) {
-        var elementId = event.target.id;
-
-        var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model) as String);
-        var currentFigurePossibleMoves = model.figures.find((figure) => figure.Id === elementId).PossibleMoves;
-        for (var i = 0; i < currentFigurePossibleMoves.length; i++) {
-            $("#" + currentFigurePossibleMoves[i].Row + "" + currentFigurePossibleMoves[i].Col).addClass("pink");
-        }
-    });*@
 </script>
 

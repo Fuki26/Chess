@@ -2650,6 +2650,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Chess.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Chess.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Core.dll": {}
+        }
       }
     }
   },
@@ -8547,10 +8557,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Chess.Core/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Core/Chess.Core.csproj",
+      "msbuildProject": "../Chess.Core/Chess.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "Chess.Core >= 1.0.0",
       "Microsoft.AspNet.Mvc >= 5.2.7",
       "Microsoft.AspNetCore.SignalR.Core >= 1.1.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.0.0",
@@ -8594,7 +8610,11 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Data\\Chess\\Chess.Core\\Chess.Core.csproj": {
+              "projectPath": "C:\\Data\\Chess\\Chess.Core\\Chess.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

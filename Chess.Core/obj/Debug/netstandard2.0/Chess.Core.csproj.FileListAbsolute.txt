@@ -1,0 +1,8 @@
+C:\Data\Chess\Chess.Core\bin\Debug\netstandard2.0\Chess.Core.deps.json
+C:\Data\Chess\Chess.Core\bin\Debug\netstandard2.0\Chess.Core.dll
+C:\Data\Chess\Chess.Core\bin\Debug\netstandard2.0\Chess.Core.pdb
+C:\Data\Chess\Chess.Core\obj\Debug\netstandard2.0\Chess.Core.AssemblyInfoInputs.cache
+C:\Data\Chess\Chess.Core\obj\Debug\netstandard2.0\Chess.Core.AssemblyInfo.cs
+C:\Data\Chess\Chess.Core\obj\Debug\netstandard2.0\Chess.Core.dll
+C:\Data\Chess\Chess.Core\obj\Debug\netstandard2.0\Chess.Core.pdb
+C:\Data\Chess\Chess.Core\obj\Debug\netstandard2.0\Chess.Core.csprojAssemblyReference.cache
