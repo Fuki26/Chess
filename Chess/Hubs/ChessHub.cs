@@ -20,12 +20,10 @@ namespace Chess.Hubs
 
         public static Board boardModel = new Board();
 
-        public async Task SecondCommand(Move move)
-        {
-            var debug = -1;
-        }
         public async Task SendMessage(Move? move)
         {
+
+            // This is the first rendering of the figures
             if (move == null)
             {
                 boardModel.Figures.Clear();

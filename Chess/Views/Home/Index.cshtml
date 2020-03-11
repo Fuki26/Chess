@@ -87,7 +87,7 @@
 
             connection.start().then(() => {
                 console.log("Connection is established");
-                connection.invoke('SecondCommand', data).then(() => {
+                connection.invoke('SendMessage', data).then(() => {
                     connection.stop().then(() => {
                         console.log("Connection is closed 1");
                     });
