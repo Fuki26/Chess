@@ -31,22 +31,24 @@
 </table>
 
 <script type="text/javascript">
-
+    
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
 
-    connection.on("Chess", function (board) {
+
+    //#region Receive board functionality
+
+    connection.on("ReceiveMessage", function (board) {
+        $("div").remove();
         for (i = 0; i < board.figures.length; i++) {
             var currentFigure = board.figures[i];
 
             var figureId = currentFigure.id;
             var figureColor = currentFigure.color;
             var figureType = currentFigure.type;
-            
 
             var cellId = currentFigure.coordinates.row + "" + currentFigure.coordinates.col;
 
             $("td#" + cellId).append($('<div id=' + figureId + ' class=' + figureColor + figureType + ' data-color=' + figureColor + '></div>'));
-
 
             //Consider whether the element is removed and make the efect of explode
             //$("#" + result[1]).hide("explode", 1000);
@@ -74,6 +76,35 @@
         }
     });
 
+    function EnableBlackFigures() {
+        $("div[data-color=Black]").draggable('enable');
+        $("div[data-color=White]").draggable('disable');
+    }
+
+    function EnableWhiteFigures() {
+        $("div[data-color=Black]").draggable('disable');
+        $("div[data-color=White]").draggable('enable');
+    }
+
+
+    //#endregion
+
+    connection.start().then(function () {
+        // document.getElementById("sendmessage").disabled = false;
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    //#region Send request for initial rendering
+
+    setTimeout(() => {
+        connection.invoke("SendMessage", null).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }, 500);
+
+    //#endregion
+
     $("td").droppable({
         hoverClass: "ui-state-active",
         drop: function (event, ui) {
@@ -85,39 +116,15 @@
                 TargetRow: parseInt(event.target.id.substr(0, 1))
             }
 
-            connection.start().then(() => {
-                console.log("Connection is established");
-                connection.invoke('SendMessage', data).then(() => {
-                    connection.stop().then(() => {
-                        console.log("Connection is closed 1");
-                    });
-                }).catch(error => {
-                    var debug = -1;
-                });
+            connection.invoke("SendMessage", data).catch(function (err) {
+                return console.error(err.toString());
             });
         }
     })
 
-    function EnableBlackFigures() {
-        $("div[data-color=Black]").draggable('enable');
-        $("div[data-color=White]").draggable('disable');
-    }
+    
 
-    function EnableWhiteFigures() {
-        $("div[data-color=Black]").draggable('disable');
-        $("div[data-color=White]").draggable('enable');
-    }
-
-    connection.start().then(() => {
-        console.log("Connection is established");
-        connection.invoke('SendMessage', null).then(() => {
-            connection.stop().then(() => {
-                console.log("Connection is closed 1");
-            });
-        }).catch(error => {
-            var debug = -1;
-        });
-    });
+    
 
     @*$("div").click(function (event) {
         var elementId = event.target.id;
