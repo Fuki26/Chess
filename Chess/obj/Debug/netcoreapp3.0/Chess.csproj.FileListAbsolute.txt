@@ -519,3 +519,5 @@ C:\Data\Chess\Chess\obj\Debug\netcoreapp3.0\Chess.Views.pdb
 C:\Data\Chess\Chess\obj\Debug\netcoreapp3.0\Chess.csproj.CopyComplete
 C:\Data\Chess\Chess\obj\Debug\netcoreapp3.0\Chess.dll
 C:\Data\Chess\Chess\obj\Debug\netcoreapp3.0\Chess.pdb
+D:\Chess\Chess\bin\Debug\netcoreapp3.0\Chess.Core.dll
+D:\Chess\Chess\bin\Debug\netcoreapp3.0\Chess.Core.pdb
