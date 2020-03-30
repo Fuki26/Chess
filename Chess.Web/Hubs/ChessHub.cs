@@ -33,6 +33,14 @@ namespace Chess.Hubs
                 this.Move(move);
             }
 
+            if(boardModel.TurnType == Color.Black)
+            {
+                boardModel.TurnType = Color.White;
+            }
+            else
+            {
+                boardModel.TurnType = Color.Black;
+            }
             await Clients.All.SendAsync("ReceiveMessage", boardModel);
         }
 
@@ -53,7 +61,7 @@ namespace Chess.Hubs
                 {
                     pawnsRowNumber = 7;
                     otherFiguresRowNumber = 8;
-                    color = Color.White;
+                    color = color == Color.Black ? Color.White : Color.Black;
                 }
 
                 for (int columnNumber = 1; columnNumber <= 8; columnNumber++)
@@ -111,6 +119,7 @@ namespace Chess.Hubs
                     case "pawn":
                         boardModel.Figures[i] = Pawn.CalculatePossibleMoves(boardModel, boardModel.Figures[i]);
                         break;
+                    // TODO: CalculatePossibleMoves for all types of figures
                 }
             }
 
@@ -130,10 +139,11 @@ namespace Chess.Hubs
                 switch (currentFigure.Type)
                 {
                     case "pawn":
-
                         currentFigure = Pawn.Move(currentFigure, move.TargetRow, move.TargetCol);
                         currentFigure = Pawn.CalculatePossibleMoves(boardModel, currentFigure);
                         break;
+
+                    // TODO: For all figures .Move and .CalculatePossibleMoves
                 }
             }
         }

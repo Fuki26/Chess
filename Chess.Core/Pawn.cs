@@ -1,9 +1,9 @@
 ﻿using Chess.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Chess.Core
 {
+    //TODO: Create interface IFigure with methods CalculatePossibleMoves and Move
     public class Pawn
     {
         private static List<Coordinates> AllPossibleCoordinates

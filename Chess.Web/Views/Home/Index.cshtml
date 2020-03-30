@@ -7,19 +7,18 @@
 <script src="~/Scripts/jquery-ui-1.10.2.min.js"></script>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
-@*<script src="~/js/chess.js"></script>*@
 
 
 <input type="hidden" id="username" />
 <table id="chessBoard">
     @{
-        for (int i = 1; i <= 8; i++)
+        for (int row = 1; row <= 8; row++)
         {
             <tr>
-                @for (int j = 1; j <= 8; j++)
+                @for (int column = 1; column <= 8; column++)
                 {
-                    var cellId = i.ToString() + j.ToString();
-                    var cellClass = ((i + j) % 2 == 0) ? "white" : "black";
+                    var cellId = row.ToString() + column.ToString();
+                    var cellClass = ((row + column) % 2 == 0) ? "white" : "black";
 
                     <td id='@cellId' class='@cellClass'>
                         
@@ -33,12 +32,15 @@
 <script type="text/javascript">
     
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
-
+    var board;
 
     //#region Receive board functionality
 
     connection.on("ReceiveMessage", function (board) {
+        board = board;
+        //Remove all figures out from the board
         $("div").remove();
+        // Reset td classes in order to get initial board
         $("td").removeClass("pink");
 
         for (i = 0; i < board.figures.length; i++) {
@@ -99,7 +101,6 @@
     //#endregion
 
     connection.start().then(function () {
-        // document.getElementById("sendmessage").disabled = false;
     }).catch(function (err) {
         return console.error(err.toString());
     });
@@ -117,7 +118,7 @@
     $("td").droppable({
         hoverClass: "ui-state-active",
         drop: function (event, ui) {
-
+            
             var data = {
                 FigureId: ui.draggable[0].id,
                 TargetId: event.target.id,
