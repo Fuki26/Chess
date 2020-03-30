@@ -113,7 +113,6 @@ D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Core.pdb
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.csprojAssemblyReference.cache
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\staticwebassets\Chess.Web.StaticWebAssets.Manifest.cache
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\staticwebassets\Chess.Web.StaticWebAssets.xml
-D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cache
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.RazorAssemblyInfo.cache
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.RazorAssemblyInfo.cs
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.AssemblyInfoInputs.cache
@@ -130,3 +129,19 @@ D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.Views.pdb
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.csproj.CopyComplete
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.dll
 D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.pdb
+D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\Chess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cache
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Chess\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
